@@ -1,3 +1,5 @@
+MNIST_data
+.idea
 venv
 *.pyc
 node_modules

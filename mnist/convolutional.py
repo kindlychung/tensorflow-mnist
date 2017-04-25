@@ -1,9 +1,17 @@
 import os
-import model
+import mnist.model as model
 import tensorflow as tf
 
+
+checkpoint_file = os.path.join(os.path.dirname(__file__), 'data', 'convolutional1.ckpt')
+mnist_data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'MNIST_data')
+
+checkpoint_file = "/home/kaiyin/PycharmProjects/tensorflow-mnist/mnist/data/convolutional1.ckpt"
+mnist_data_dir = "/home/kaiyin/PycharmProjects/tensorflow-mnist/MNIST_data"
 from tensorflow.examples.tutorials.mnist import input_data
-data = input_data.read_data_sets("/tmp/data/", one_hot=True)
+data = input_data.read_data_sets(mnist_data_dir, one_hot=True)
+
+
 
 # model
 with tf.variable_scope("convolutional"):
@@ -31,6 +39,6 @@ with tf.Session() as sess:
     print(sess.run(accuracy, feed_dict={x: data.test.images, y_: data.test.labels, keep_prob: 1.0}))
 
     path = saver.save(
-        sess, os.path.join(os.path.dirname(__file__), 'data', 'convolutional.ckpt'),
+        sess, checkpoint_file,
         write_meta_graph=False, write_state=False)
     print("Saved:", path)
