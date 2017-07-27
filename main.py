@@ -1,10 +1,11 @@
 import numpy as np
 from PIL import Image
+import os
 import requests
 import numpy as np
 from io import BytesIO
-import tensorflow as tf
 from flask import Flask, jsonify, render_template, request
+import tensorflow as tf
 
 from mnist.util.preprocess import preprocess
 
@@ -13,7 +14,7 @@ from mnist import model
 x = tf.placeholder("float", [None, 784])
 sess = tf.Session()
 
-regression_checkpoint = "mnist/data/regression.ckpt"
+regression_checkpoint = os.path.join(os.path.dirname(__file__), 'mnist', 'data', 'regression.ckpt')
 # restore trained data
 with tf.variable_scope("regression"):
     y1, variables = model.regression(x)
@@ -21,7 +22,7 @@ saver = tf.train.Saver(variables)
 saver.restore(sess, regression_checkpoint)
 
 
-convnet_checkpoint = "mnist/data/convolutional1.ckpt"
+convnet_checkpoint = os.path.join(os.path.dirname(__file__), 'mnist', 'data', 'convolutional1.ckpt')
 with tf.variable_scope("convolutional"):
     keep_prob = tf.placeholder("float")
     y2, variables = model.convolutional(x, keep_prob)

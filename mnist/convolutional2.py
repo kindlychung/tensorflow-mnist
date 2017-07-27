@@ -25,7 +25,7 @@ show_flat_image(img, 28, 28)
 x = tf.placeholder("float", [None, 784])
 sess = tf.Session()
 
-convnet_checkpoint = "mnist/data/convolutional1.ckpt"
+convnet_checkpoint = "/home/kaiyin/PycharmProjects/tensorflow-mnist/mnist/data/convolutional1.ckpt"
 with tf.variable_scope("convolutional"):
     keep_prob = tf.placeholder("float")
     y2, variables = model.convolutional(x, keep_prob)
