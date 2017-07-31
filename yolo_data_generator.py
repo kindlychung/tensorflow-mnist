@@ -240,7 +240,6 @@ def make_annotated_img(config: YoloTrainConfig):
     out = compose_multple(background, txts, labels)
     # cv2.imwrite(png_path, out["image"])
     imsave(png_path, out["image"])
-    np.save(png_path, out["image"])
     create_annotation(out, os.path.basename(png_path), xml_path)
 
 
